@@ -1,0 +1,199 @@
+[gd_scene load_steps=20 format=3 uid="uid://olknwyyh55rb"]
+
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://j57vwwjt3nts" path="res://autumn_field_puresky_4k.hdr" id="1_w48qg"]
+[ext_resource type="PackedScene" uid="uid://drfssxxx010rk" path="res://Models/Chest of Gold/chest.tscn" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://cq8d7ddyj1pkd" path="res://Models/barrel/barrel.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://wnk3pj3i2tlt" path="res://Models/building/ceiling.glb" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bpcqmnorwuxfh" path="res://Models/building/wall.glb" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dbw5ksudlcy4m" path="res://Models/building/wall_doorway.glb" id="6_5vw27"]
+[ext_resource type="PackedScene" uid="uid://dsfs13ewswt03" path="res://Models/building/wall_shelved.glb" id="8_4c57u"]
+[ext_resource type="PackedScene" uid="uid://cdgajxacsues5" path="res://Models/building/wall_corner.glb" id="8_efxa6"]
+[ext_resource type="PackedScene" uid="uid://dsaiqjkfluy7u" path="res://Models/building/wall_cracked.glb" id="9_dg77c"]
+[ext_resource type="PackedScene" uid="uid://dus0rblbwtyan" path="res://Models/building/wall_archedwindow_gated.glb" id="10_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://csvquc16i042n" path="res://Models/zombie/zombie.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://blgnx81ysbkrn" path="res://Models/skeleton/skeleton_mage.glb" id="13_vivmo"]
+[ext_resource type="PackedScene" uid="uid://dunyl0twbyqmk" path="res://Models/props/torch_mounted.glb" id="14_2cqfq"]
+
+[sub_resource type="Gradient" id="Gradient_w48qg"]
+offsets = PackedFloat32Array(0, 0.223881, 0.858209, 1)
+colors = PackedColorArray(0.00494814, 0.0386298, 0.12307, 1, 0.223881, 0.223881, 0.223881, 1, 0.939481, 0.841951, 0.721793, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vivmo"]
+gradient = SubResource("Gradient_w48qg")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_yaehf"]
+panorama = ExtResource("1_w48qg")
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("PanoramaSkyMaterial_yaehf")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+ambient_light_sky_contribution = 0.5
+tonemap_mode = 3
+ssao_enabled = true
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture1D_vivmo")
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.766044, -0.55667, 0.321394, 2.78059e-08, 0.5, 0.866025, -0.642788, 0.663414, -0.383022, 0, 14.4, 0)
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+visible = false
+use_collision = true
+
+[node name="Wall" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(45.954, 0, 0, 0, 3.3, 0, 0, 0, 1, 0, 2.1, -12.9)
+
+[node name="Wall2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(45.954, 0, 0, 0, 3.3, 0, 0, 0, 1, 0, 2.1, 23.1)
+
+[node name="Wall3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-1.57204e-06, 0, 1, 0, 3.3, 0, -35.964, 0, -4.37114e-08, 9.4, 2.1, 5.1)
+use_collision = true
+
+[node name="CSGCylinder3D" type="CSGBox3D" parent="CSGCombiner3D/Wall3"]
+transform = Transform3D(0.1, 0, 0, 0, 1.3, 0, 1.42109e-14, 0, 1.8, 0, -0.13, 0)
+operation = 2
+size = Vector3(1, 0.8, 1)
+
+[node name="Wall6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-1.57204e-06, 0, 1, 0, 3.3, 0, -35.964, 0, -4.37114e-08, 22.7, 2.1, 5.1)
+
+[node name="Wall4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-1.57204e-06, 0, 1, 0, 3.3, 0, -35.964, 0, -4.37114e-08, -9.9, 2.1, 5.1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/Wall4"]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 1.3, 0.408742, -0.15, 0)
+operation = 2
+size = Vector3(1, 0.7, 1)
+
+[node name="Wall5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-1.57204e-06, 0, 1, 0, 3.3, 0, -35.964, 0, -4.37114e-08, -22.8, 2.1, 5.1)
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(46.2, 0, 0, 0, 1, 0, 0, 0, 14.08, 0, 0, 5.12)
+use_collision = true
+size = Vector3(1, 1, 2.6)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Floor"]
+transform = Transform3D(0.1, 0, 0, 0, 4.4, 0, 0, 0, 0.3, 0, 0, -0.284091)
+sides = 16
+
+[node name="ProtoController" parent="." instance=ExtResource("1_ig7tw")]
+transform = Transform3D(-0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, -0.984808, -5.1, 0.5, -8)
+can_sprint = true
+can_freefly = true
+input_left = "move_left"
+input_right = "move_right"
+input_forward = "move_up"
+input_back = "move_down"
+input_jump = "jump"
+
+[node name="Chest" parent="." instance=ExtResource("3_1bvp3")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.1, 0.5, -5.3)
+
+[node name="Barrel" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4.2, -6)
+
+[node name="ceiling" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 4.5, -10.1)
+
+[node name="ceiling2" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 4.5, -6.1)
+
+[node name="ceiling3" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 4.5, -2.1)
+
+[node name="ceiling4" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 4.5, 1.9)
+
+[node name="ceiling5" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3, 4.5, -10.1)
+
+[node name="ceiling6" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3, 4.5, -6.1)
+
+[node name="ceiling7" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3, 4.5, -2.1)
+
+[node name="ceiling8" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3, 4.5, 1.9)
+
+[node name="ceiling9" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3, 4.5, -10.1)
+
+[node name="ceiling10" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3, 4.5, -6.1)
+
+[node name="ceiling11" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3, 4.5, -2.1)
+
+[node name="ceiling12" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3, 4.5, 1.9)
+
+[node name="wall_doorway2" parent="." instance=ExtResource("6_5vw27")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10.2, 0.5, -8)
+
+[node name="wall_shelved" parent="." instance=ExtResource("8_4c57u")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -10.2, 0.5, -4)
+
+[node name="wall_shelved2" parent="." instance=ExtResource("8_4c57u")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -10.2, 0.5, 0)
+
+[node name="wall_corner2" parent="." instance=ExtResource("8_efxa6")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -22.2, 0.5, 3.9)
+
+[node name="wall_corner3" parent="." instance=ExtResource("8_efxa6")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -10.2, 0.5, 3.9)
+
+[node name="wall_corner4" parent="." instance=ExtResource("8_efxa6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2, 0.5, -12)
+
+[node name="wall_corner5" parent="." instance=ExtResource("8_efxa6")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -22.2, 0.5, -12)
+
+[node name="wall_cracked2" parent="." instance=ExtResource("9_dg77c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2, 0.5, 3.9)
+
+[node name="wall_archedwindow_gated2" parent="." instance=ExtResource("10_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2, 0.5, 3.9)
+
+[node name="wall_cracked3" parent="." instance=ExtResource("9_dg77c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2, 0.5, -12)
+
+[node name="wall_archedwindow_gated3" parent="." instance=ExtResource("10_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2, 0.5, -12)
+
+[node name="wall3" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -22.2, 0.5, -8)
+
+[node name="wall4" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -22.2, 0.5, -4)
+
+[node name="wall5" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -22.2, 0.5, -0.0999999)
+
+[node name="Zombie2" parent="." instance=ExtResource("11_efxa6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2, 0.5, -1.7)
+
+[node name="skeleton_mage" parent="." instance=ExtResource("13_vivmo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.9, 9.9)
+
+[node name="torch_mounted2" parent="." instance=ExtResource("14_2cqfq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10.5, 2.4, -6.5)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="torch_mounted2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.400001)
+light_color = Color(0.852124, 0.602779, 0.251919, 1)
+light_energy = 2.0
+shadow_enabled = true
+omni_range = 15.0

@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://csvquc16i042n"]
+
+[ext_resource type="PackedScene" uid="uid://bldkft15qm0np" path="res://Models/zombie/zombie.glb" id="1_8mvtn"]
+[ext_resource type="AnimationLibrary" uid="uid://cl8sh2ywxeuds" path="res://Models/zombie/zombie_idle.glb" id="2_3ug3s"]
+[ext_resource type="AnimationLibrary" uid="uid://bpk08fsverf3g" path="res://Models/zombie/zombie_jump.glb" id="3_l61ag"]
+[ext_resource type="AnimationLibrary" uid="uid://ckg8jr73m4kx7" path="res://Models/zombie/zombie_run.glb" id="4_yc6ub"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_734br"]
+
+[node name="Zombie" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 1.4, 0)
+shape = SubResource("CylinderShape3D_734br")
+
+[node name="zombie" parent="." instance=ExtResource("1_8mvtn")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="zombie"]
+libraries = {
+&"zombie_idle": ExtResource("2_3ug3s"),
+&"zombie_jump": ExtResource("3_l61ag"),
+&"zombie_run": ExtResource("4_yc6ub")
+}
+autoplay = "zombie_idle/Idle"
